@@ -11,6 +11,71 @@
   </head>
 
   <body>
+    <header>
+      <% if admin_signed_in? %>
+      <li>
+        商品一覧
+      </li>
+      <li>
+        会員一覧
+      </li>
+      <li>
+        注文履歴一覧
+      </li>
+      <li>
+        ログアウト
+        <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </li>
+
+    <% else %>
+      <li>
+        About!
+      </li>
+      <li>
+        商品一覧
+      </li>
+      <li>
+        新規登録
+      </li>
+      <li>
+        ログイン
+        <%#= link_to "ログイン", %>
+      </li>
+    <% end %>
+
+      <% if customer_signed_in? %><!--ログインしていたら-->
+      <li>
+        マイページ
+      </li>
+      <li>
+        商品一覧
+      </li>
+      <li>
+        カート
+      </li>
+      <li>
+        ログアウト
+        <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %><!--ログインしていなかったら-->
+      <li>
+        About
+      </li>
+      <li>
+        商品一覧
+      </li>
+      <li>
+        新規登録
+        <%#= link_to "新規登録",  %>
+      </li>
+      <li>
+        ログイン
+        <%#= link_to "ログイン",  %>
+      </li>
+    <% end %>
+
+
+    </header>
     <%= yield %>
   </body>
 </html>
