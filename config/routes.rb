@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   root to: 'public/homes#top'
   get "about" => "public/homes#about"
+  get "customers/show" => "public/customers#show"
+  get "/customers/information/edit" => "public/customers#edit"
 
-  resources :customers, only: [:show, :edit]
+  get "/admin" => "admin/homes#top"
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
