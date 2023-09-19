@@ -1,9 +1,16 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = Customer.all
+
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+
+  end
+
+  def update
+    @customers = Customer.find(params[:id])
+    @customers.update
+    redirect_to customers_show_path
   end
 end
+

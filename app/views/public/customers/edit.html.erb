@@ -1,0 +1,11 @@
+<h1>会員情報編集</h1>
+<%= form_with model: @customers do |f| %>
+  <label for="inputName">氏名</label>
+  <%= f.text_field :last_name, autofocus: true, id:"inputName", placeholder:"苗字"%>
+  <%= f.text_field :first_name, autofocus: true, id:"inputName", placeholder:"名前"%>
+
+ 
+  <br>
+  <%= f.submit "変更内容を保存" %>
+  <%= f.submit "退会する" %>
+<% end %>
