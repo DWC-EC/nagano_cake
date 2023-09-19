@@ -27,25 +27,11 @@
         <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
 
-    <% else %>
-      <li>
-        About!
-      </li>
-      <li>
-        商品一覧
-      </li>
-      <li>
-        新規登録
-      </li>
-      <li>
-        ログイン
-        <%#= link_to "ログイン", %>
-      </li>
     <% end %>
 
       <% if customer_signed_in? %><!--ログインしていたら-->
       <li>
-        マイページ
+         <%= link_to "マイページ", customer_path %>
       </li>
       <li>
         商品一覧
@@ -54,23 +40,22 @@
         カート
       </li>
       <li>
-        ログアウト
-        <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
       </li>
     <% else %><!--ログインしていなかったら-->
       <li>
-        About
+        <%= link_to "About", about_path %>
       </li>
       <li>
         商品一覧
       </li>
       <li>
         新規登録
-        <%#= link_to "新規登録",  %>
+        <%= link_to "新規登録", new_customer_registration_path  %>
       </li>
       <li>
         ログイン
-        <%#= link_to "ログイン",  %>
+        <%= link_to "ログイン", new_customer_session_path %>
       </li>
     <% end %>
 
