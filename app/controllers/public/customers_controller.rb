@@ -4,13 +4,19 @@ class Public::CustomersController < ApplicationController
   end
 
   def edit
-
+    @customer = current_customer
   end
 
   def update
-    @customers = Customer.find(params[:id])
-    @customers.update
+    @customer = current_customer#ログインしているユーザーの情報
+    @customer.update(customer_params)#下で指定したcustomer_paramsを受け取ってアップデート
     redirect_to customers_show_path
+  end
+
+  private
+
+  def customer_params#意図しないデータを登録しないようにする
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email)
   end
 end
 
