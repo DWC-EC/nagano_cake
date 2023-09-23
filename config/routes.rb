@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get "customers/show" => "customers#show"
     get "/customers/information/edit" => "customers#edit"
     patch "/customers/information" => "customers#update"
+    get "/customers/confirm_withdraw" => "customers#confirm_withdraw"
+    patch "/customers/withdraw" => "customers#withdraw"
   end
 
   namespace :admin do#namespaceでurlにadminをつける

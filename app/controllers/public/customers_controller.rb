@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   def show
-
+    @customer = current_customer
   end
 
   def edit
@@ -11,6 +11,17 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer#ログインしているユーザーの情報
     @customer.update(customer_params)#下で指定したcustomer_paramsを受け取ってアップデート
     redirect_to customers_show_path
+  end
+
+  def confirm_withdraw
+    
+  end
+
+  def withdraw
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
   end
 
   private

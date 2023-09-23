@@ -12,6 +12,9 @@
 
   <body>
     <header>
+      <a class="logo" href="/">
+        <h1>LOGO</h1>
+      </a>
       <% if admin_signed_in? %>
         <% if request.fullpath.include? "/admin" %>
           <li>

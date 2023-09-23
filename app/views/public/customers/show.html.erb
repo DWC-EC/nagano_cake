@@ -3,12 +3,12 @@
 <h2>登録情報</h2>
 <%=link_to "編集する", customers_information_edit_path(current_customer) %><br>
 
-氏名 <%= current_customer.last_name %> <%= current_customer.first_name %><br>
-カナ <%= current_customer.last_name_kana %> <%= current_customer.first_name_kana %><br>
-郵便番号 <%= current_customer.postal_code %><br>
-住所 <%= current_customer.address %><br>
-電話番号 <%= current_customer.telephone_number %><br>
-メールアドレス <%= current_customer.email %><br>
+氏名 <%= @customer.last_name %> <%= @customer.first_name %><br>
+カナ <%= @customer.last_name_kana %> <%= @customer.first_name_kana %><br>
+郵便番号 <%= @customer.postal_code %><br>
+住所 <%= @customer.address %><br>
+電話番号 <%= @customer.telephone_number %><br>
+メールアドレス <%= @customer.email %><br>
 
 <h2>注文履歴</h2>
 一覧を見る
