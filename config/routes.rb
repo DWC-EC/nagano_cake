@@ -15,10 +15,15 @@ Rails.application.routes.draw do
     patch "/customers/information" => "customers#update"
     get "/customers/confirm_withdraw" => "customers#confirm_withdraw"
     patch "/customers/withdraw" => "customers#withdraw"
+    patch "/customers/information" => "customers#update"
   end
 
   namespace :admin do#namespaceでurlにadminをつける
     get "" => "homes#top"
+    get "items/new" => "items#new"
+    get "/items" => "items#index"
+    get "/items/:id" => "items#show"
+    post "/items" => "items#create"
   end
 
 

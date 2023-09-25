@@ -1,0 +1,12 @@
+<h1>商品新規登録</h1>
+<%= form_with model: @items do |f| %>
+  商品画像<%= f.file_field :image, accept: "image/*" %><br>
+
+  商品名<%= f.text_field :name %><br>
+
+  商品説明<%= f.text_area :introduction %><br>
+
+  税抜価格<%= f.text_field :price %>円<br>
+  
+  <div><%= f.submit '新規登録' %></div>
+<% end %>
