@@ -14,7 +14,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def confirm_withdraw
-    
+
   end
 
   def withdraw
