@@ -1,0 +1,21 @@
+<%= flash[:notice] %>
+<h1><%= (@customer.last_name + @customer.first_name) %>さんの会員詳細</h1>
+
+<p>会員ID <%= @customer.id %></p>
+<p>氏名<%= (@customer.last_name + @customer.first_name) %></p>
+<p>フリガナ<%= (@customer.last_name_kana + @customer.first_name_kana) %></p>
+<p>郵便番号<%= @customer.postal_code %></p>
+<p>住所<%= @customer.address %></p>
+<p>電話番号<%= @customer.telephone_number %></p>
+<p>メールアドレス<%= @customer.email %></p>
+<p>
+  会員ステータス
+   <% if @customer.is_deleted %>
+     退会済み
+   <% else %>
+     有効
+   <% end %>
+</p>
+
+<div><%= link_to "編集する", edit_admin_customer_path(@customer.id) %></div>
+<div>注文一覧を見る</div>

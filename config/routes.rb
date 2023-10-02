@@ -17,11 +17,13 @@ Rails.application.routes.draw do
     patch "/customers/withdraw" => "customers#withdraw"
     patch "/customers/information" => "customers#update"
     resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
   end
 
   namespace :admin do#namespaceでurlにadminをつける
     get "" => "homes#top"
     resources :items, only: [:new, :index, :show, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
 
 

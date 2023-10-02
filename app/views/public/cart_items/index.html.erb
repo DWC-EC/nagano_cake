@@ -1,0 +1,51 @@
+<h1>ショッピングカート</h1>
+
+<%#= form_with model: @cart_item, url:  do |f| %>
+  <%#= f.submit "カートを空にする" %>
+<%# end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+    <tr>
+    <td>
+      <%= image_tag cart_item.item.get_image(50,50) %>
+      <%= cart_item.item.name %>
+    </td>
+    <td><%= cart_item.item.add_tax_price %></td>
+    <td>
+      <%= form_with model: cart_item do |f| %>
+        <%= f.select :amount, *[1..10] %>
+        <%= f.submit "変更" %>
+      <% end %>
+    </td>
+    <td><%= cart_item.subtotal %></td>
+      <% @total += cart_item.subtotal %>
+      <!--０と定義したところに税込価格と数量をかけたものを足していく-->
+    <td>
+      <%= form_with model: @cart_item,url: cart_items_path do |f| %>
+        <%= f.submit "削除する" %>
+      <% end %>
+    </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%=link_to root_path do %>
+    買い物を続ける
+  <% end %>
+</div>
+<div>合計金額<%= @total %></div>
+<div>情報入力に進む</div>
