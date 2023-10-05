@@ -1,9 +1,5 @@
 <h1>ショッピングカート</h1>
 
-<%#= form_with model: @cart_item, url:  do |f| %>
-  <%#= f.submit "カートを空にする" %>
-<%# end %>
-
 <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete %>
 
 <table>
@@ -35,9 +31,6 @@
       <% @total += cart_item.subtotal %>
       <!--０と定義したところに税込価格と数量をかけたものを足していく-->
     <td>
-      <%= form_with model: @cart_item,url: cart_items_path do |f| %>
-        <%= f.submit "削除する" %>
-      <% end %>
       <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete %>
     </td>
     </tr>

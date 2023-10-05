@@ -10,6 +10,7 @@
   個数選択
   <%= f.select :amount, *[1..10] %>
   <%= f.hidden_field :item_id, :value => @item.id %>
-  <!--数と一緒にitem_idのデータを送るviewには表示されない-->
+  <!--数と一緒にitem_idのデータを送る。viewには表示されない
+  item_idをコントローラーの@item.idに渡す-->
   <%= f.submit "カートに入れる" %>
 <% end %>
