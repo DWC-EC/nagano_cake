@@ -13,15 +13,19 @@ class Public::OrdersController < ApplicationController
     @order.name = current_customer.last_name + current_customer.first_name
     @order.payment_method = params[:order][:payment_method]
     @total = 0
-    
+    @postage = 800
+    @total_price = 0
+
   end
 
   def complete
-
   end
 
   def create
-
+    @order = Order.new(order_params)
+    @order.save
+    current_member.cart_items.destroy_all 
+    redirect_to orders_complete_path
   end
 
   def index
@@ -35,6 +39,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+    params.require(:order).permit(:postage, :payment_method, :postal_code, :address, :name)
   end
 end

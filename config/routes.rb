@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get "" => "homes#top"
     resources :items, only: [:new, :index, :show, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:show]
   end
 
 
