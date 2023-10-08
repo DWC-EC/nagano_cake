@@ -16,10 +16,16 @@ Rails.application.routes.draw do
     get "/customers/confirm_withdraw" => "customers#confirm_withdraw"
     patch "/customers/withdraw" => "customers#withdraw"
     patch "/customers/information" => "customers#update"
+
     resources :items, only: [:index, :show]
+
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items, only: [:index, :update, :destroy, :create]
-  end
+
+    post "/orders/confirm" => "orders#confirm"
+    get "/orders/complete" => "orders#complete"
+    resources :orders, only: [:new, :index, :create, :show]
+   end
 
   namespace :admin do#namespaceでurlにadminをつける
     get "" => "homes#top"

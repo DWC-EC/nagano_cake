@@ -58,4 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'kaminari','~> 1.2.1'
 gem 'pry-rails'
+gem 'pry-byebug', group: :development
 gem "enum_help"
