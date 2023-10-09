@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-      <% @cart_items.each do |cart_item| %>
+      <% @cart_items.each do |cart_item| %> <!--カートアイテムから情報を出す-->
       <tr>
         <td>
           <%= image_tag cart_item.item.get_image(50,50) %>
@@ -30,6 +30,7 @@
 </div>
 
 <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+<!--orderのcreateにデータを渡す-->
   <div>
     <p>
       送料<%= @postage %>
@@ -38,7 +39,7 @@
     <p>
       <% @total_price = @total + @postage %>
       請求金額<%= @total_price %>
-      <%#= hidden_field :total_price, :value =>  @order.total_price %>
+      <%= f.hidden_field :billing_amount, :value =>  @total_price %>
     </p>
   </div>
 
@@ -48,12 +49,14 @@
     <%= f.hidden_field :payment_method, :value => @order.payment_method %>
     <h2>お届け先</h2>
     〒<%= @order.postal_code %>
-    <%= f.hidden_field :postal_code, :value => @order.postal_code%>
+    <%= f.hidden_field :postal_code, :value => @order.postal_code %>
     <%= @order.address %>
-    <%= f.hidden_field :address, :value => @order.address%>
+    <%= f.hidden_field :address, :value => @order.address %>
     <p>
       <%= @order.name %>
       <%= f.hidden_field :name, :value => @order.name %>
+      <%= f.hidden_field :customer_id, :value => @order.customer_id %>
+      <%= f.hidden_field :postage, :value => @postage %>
     </p>
   </div>
 
