@@ -20,7 +20,7 @@
         </td>
         <td><%= cart_item.item.add_tax_price %></td>
         <td><%= cart_item.amount %></td>
-        <td><%= cart_item.subtotal %></td>
+        <td><%= cart_item.subtotal %><!--小計表示--></td>
           <% @total += cart_item.subtotal %>
           <!--０と定義したところに税込価格と数量をかけたものを足していく-->
       </tr>
