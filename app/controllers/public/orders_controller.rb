@@ -22,7 +22,7 @@ class Public::OrdersController < ApplicationController
 
   def create#注文情報保存　OrderItemモデルに保存
     @order = Order.new(order_params) #ストロングパラメータ
-   
+
     @order.save #confirmを保存？
     #order_item(注文詳細)への保存　カートに入れた商品の種類毎にデータがあるのでeach
     current_customer.cart_items.each do |cart_item|
@@ -39,7 +39,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-
+    @order = current_customer.orders.all
   end
 
   def show

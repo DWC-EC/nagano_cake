@@ -1,3 +1,4 @@
+<%= flash[:notice] %>
 <h1>マイページ</h1>
 
 <h2>登録情報</h2>
@@ -11,4 +12,4 @@
 メールアドレス <%= @customer.email %><br>
 
 <h2>注文履歴</h2>
-一覧を見る
+<%= link_to "一覧を見る" ,orders_path %>

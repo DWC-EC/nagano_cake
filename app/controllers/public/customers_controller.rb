@@ -9,8 +9,13 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer#ログインしているユーザーの情報
-    @customer.update(customer_params)#下で指定したcustomer_paramsを受け取ってアップデート
-    redirect_to customers_show_path
+    if @customer.update(customer_params)#下で指定したcustomer_paramsを受け取ってアップデート
+      flash[:notice] = "登録情報の編集に成功しました。"
+      redirect_to customers_show_path
+    else
+      flash.now[:notice] = "登録情報の編集に失敗しました。"
+      render :edit
+    end
   end
 
   def confirm_withdraw
