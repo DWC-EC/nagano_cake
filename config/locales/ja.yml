@@ -186,3 +186,25 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+
+  activerecord:
+    models:
+      customer: 会員情報
+      item: 商品情報
+    attributes:
+      customer:
+        last_name: 姓
+        first_name: 名
+        last_name_kana: セイ
+        first_name_kana: メイ
+        email: メールアドレス
+        password: パスワード
+        postal_code: 郵便番号
+        address: 住所
+        telephone_number: 電話番号
+      item:
+        image: 商品画像
+        name: 商品名
+        introduction: 商品説明
+        price: 税抜価格
+      

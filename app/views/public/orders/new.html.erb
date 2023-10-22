@@ -4,7 +4,7 @@
   <h2>支払方法</h2>
   <!--enum導入-->
   <p>
-    <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+    <%= f.radio_button :payment_method, Order.payment_methods.key(0),checked: "checked" %>
     <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
   </p>
   <p>

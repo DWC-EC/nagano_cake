@@ -5,7 +5,7 @@
     <%= link_to item_path(item.id) do %>
       <%= image_tag item.get_image(100,100) %>
     <% end %>
-    <p>商品名<%= item.name %></p>
+    <p><%= item.name %></p>
     <p>¥<%= item.add_tax_price.to_s(:dalimited) %></p>
   </div>
 <% end %>

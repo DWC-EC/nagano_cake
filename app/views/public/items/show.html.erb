@@ -1,4 +1,3 @@
-商品詳細
 <div>
   <%= image_tag @item.get_image(200,200) %>
   <h1>商品名<%= @item.name %></h1>
@@ -6,11 +5,15 @@
   <p>¥<%= @item.add_tax_price.to_s(:dalimited) %>(税込)</p>
 </div>
 
-<%= form_with model: @cart_item, url: cart_items_path do |f| %>
-  個数選択
-  <%= f.select :amount, *[1..10] %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <!--数と一緒にitem_idのデータを送る。viewには表示されない
-  item_idをコントローラーの@item.idに渡す-->
-  <%= f.submit "カートに入れる" %>
-<% end %>
+<%# if customer_signed_in? %> <!--もしユーザーがログインしていたらカートに追加を表示-->
+<!-- ↑コントローラーのbefore_actionでcreateを押した時ログインしていなかったらログイン画面に推移するよう変更-->
+  <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+    個数選択
+    <%= f.select :amount, *[1..10] %>
+    <%= f.hidden_field :item_id, :value => @item.id %>
+    <!--数と一緒にitem_idのデータを送る。viewには表示されない
+    item_idをコントローラーの@item.idに渡す-->
+    <%= f.submit "カートに入れる" %>
+  <% end %>
+<%# end %>
+

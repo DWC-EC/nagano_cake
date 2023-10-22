@@ -22,20 +22,21 @@ class Public::OrdersController < ApplicationController
 
   def create#注文情報保存　OrderItemモデルに保存
     @order = Order.new(order_params) #ストロングパラメータ
-
-    @order.save #confirmを保存？
-    #order_item(注文詳細)への保存　カートに入れた商品の種類毎にデータがあるのでeach
-    current_customer.cart_items.each do |cart_item|
-      @order_item = OrderItem.new
-      @order_item.order_id =  @order.id #注文ID←(confirm 会員ID.送料.請求金額.支払方法.配送先)
-      @order_item.item_id = cart_item.item_id #商品ID
-      @order_item.amount = cart_item.amount #個数
-      @order_item.price = (cart_item.item.price*1.1).floor #消費税込み価格
-      @order_item.save #注文商品を保存
+    if @order.save #confirmを保存？
+      #order_item(注文詳細)への保存　カートに入れた商品の種類毎にデータがあるのでeach
+      current_customer.cart_items.each do |cart_item|
+        @order_item = OrderItem.new
+        @order_item.order_id =  @order.id #注文ID←(confirm 会員ID.送料.請求金額.支払方法.配送先)
+        @order_item.item_id = cart_item.item_id #商品ID
+        @order_item.amount = cart_item.amount #個数
+        @order_item.price = (cart_item.item.price*1.1).floor #消費税込み価格
+        @order_item.save #注文商品を保存
+      end
+      current_customer.cart_items.destroy_all #カートの中身を削除(cart_items_controller)
+      redirect_to orders_complete_path
+    else
+      render :new
     end
-
-    current_customer.cart_items.destroy_all #カートの中身を削除(cart_items_controller)
-    redirect_to orders_complete_path
   end
 
   def index
