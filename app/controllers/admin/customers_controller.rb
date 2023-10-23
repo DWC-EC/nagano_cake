@@ -1,4 +1,7 @@
 class Admin::CustomersController < ApplicationController
+
+  before_action :authenticate_admin!#ログインしたユーザーのみこのコントローラーを実行可能
+
   def index
     @customer = Customer.page(params[:page]).per(10)
   end

@@ -1,4 +1,7 @@
 class Public::OrdersController < ApplicationController
+
+  before_action :authenticate_customer!#ログインしたユーザーのみこのコントローラーを実行可能
+
   def new
     @order = Order.new
     @customer = current_customer

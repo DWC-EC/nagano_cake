@@ -1,5 +1,7 @@
 class Admin::ItemsController < ApplicationController
 
+  before_action :authenticate_admin!#ログインしたユーザーのみこのコントローラーを実行可能
+
   def new
     @item = Item.new
   end

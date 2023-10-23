@@ -1,7 +1,7 @@
 class Public::CartItemsController < ApplicationController
-  
-  before_action :authenticate_customer!, only: [:create]
-  
+
+  before_action :authenticate_customer!#ログインしたユーザーのみこのコントローラーを実行可能
+
   def index
     @cart_items = current_customer.cart_items
     @total = 0
