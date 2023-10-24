@@ -11,75 +11,115 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-      <a class="logo" href="/">
-        <h1>LOGO</h1>
-      </a>
-      <% if admin_signed_in? %>
-        <% if request.fullpath.include? "/admin" %>
-          <li>
-            <%= link_to "商品一覧" ,admin_items_path %>
-          </li>
-          <li>
-            <%= link_to "会員一覧" ,admin_customers_path %>
-          </li>
-          <li>
-            <%= link_to "注文履歴一覧" ,admin_path %>
-          </li>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </li>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#f0908d;">
+      <div class="container">
 
-        <% else %>
-          <li>
-            <%= link_to "About", about_path %>
-          </li>
-          <li>
-            <%= link_to "商品一覧", items_path %>
-          </li>
-          <li>
-            <%= link_to "新規登録", new_customer_registration_path  %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_customer_session_path %>
-          </li>
+          <a class="navbar-brand" href="/">
+            <h1 class="text-light">ながのCAKE</h1>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class ="navbar-nav ml-auto"><!--右寄せ-->
+            <% if admin_signed_in? %>
+              <% if request.fullpath.include? "/admin" %>
+                <li class="nav-item">
+                  <%= link_to "商品一覧" ,admin_items_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "会員一覧" ,admin_customers_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "注文履歴一覧" ,admin_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-light' %>
+                </li>
+
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "About", about_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "商品一覧", items_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-light' %>
+                </li>
+              <% end %>
+
+            <% elsif customer_signed_in? %>
+              <li class="nav-item text-light">
+                <h4>ようこそ、<%= current_customer.last_name %>さん！</h4>
+              </li>
+              <li class="nav-item">
+                 <%= link_to "マイページ", customers_show_path, class: 'nav-link text-light ' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "商品一覧", items_path, class: 'nav-link text-light' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "カート" , cart_items_path, class: 'nav-link text-light' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-light' %>
+              </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "商品一覧", items_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-light' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-light' %>
+            </li>
+          <% end %>
+        </ul>
+          </div>
+        </div>
+      </nav>
+      <%# deivseのフラッシュメッセージを表示 %>
+      <!--<p class="notice"><%#= notice %></p>-->
+      <!--<p class="alert"><%#= alert %></p>-->
+      <% flash.each do |name, msg| %>
+        <% if flash[:alert] %>
+        <div class="alert alert-danger"<%= name %>>
+          <%= msg %>
+        </div>
+        <% elsif flash[:success] %>
+        <div class="success alert-success"<%= name %>>
+         <%= msg %>
+        </div>
+        <% else notice %>
+        <div class="notice alert-success"<%= name %>>
+          <%= msg %>
+        </div>
         <% end %>
-
-      <% elsif customer_signed_in? %>
-      <div>ようこそ、<%= current_customer.last_name %>さん！</div>
-        <li>
-           <%= link_to "マイページ", customers_show_path %>
-        </li>
-        <li>
-          <%= link_to "商品一覧", items_path %>
-        </li>
-        <li>
-          <%= link_to "カート" , cart_items_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-        </li>
-    <% else %>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
-      <li>
-        <%= link_to "商品一覧", items_path %>
-      </li>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path  %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
+      <% end %>
     </header>
 
-    <%# deivseのフラッシュメッセージを表示 %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+    <main class="m-5"> <!--全方向マージン1rem(10p)-->
+      <%= yield %>
+    </main>
+    <footer class="text-dark pt-5 pb-4"><!--パディング上５下４-->
+      <div class="container">
+        <div class="text-center"><!--左右のパディングをなくす-->
+          <p class="text-muted">Copyright © ながのCAKE All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
