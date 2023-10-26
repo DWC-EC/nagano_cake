@@ -1,12 +1,16 @@
-<h1>商品一覧</h1>（全<%= @count %>件）
-
+<div>
+<h3>商品一覧</h3>（全<%= @count %>件）
+<div>
 <% @items.each do |item| %>
   <div>
     <%= link_to item_path(item.id) do %>
       <%= image_tag item.get_image(100,100) %>
     <% end %>
     <p><%= item.name %></p>
-    <p>¥<%= item.add_tax_price.to_s(:dalimited) %></p>
+    <p>¥<%= item.add_tax_price.to_s(:delimited) %></p>
   </div>
 <% end %>
+</div>
 <%= paginate @items %>
+
+</div>

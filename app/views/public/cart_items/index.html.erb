@@ -21,7 +21,7 @@
       <%= image_tag cart_item.item.get_image(50,50) %>
       <%= cart_item.item.name %>
     </td>
-    <td><%= cart_item.item.add_tax_price %></td>
+    <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
     <td>
       <%= form_with model: cart_item do |f| %>
         <%= f.select :amount, *[1..10] %>

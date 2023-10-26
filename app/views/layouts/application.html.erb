@@ -13,11 +13,11 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#f0908d;">
+      <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color:#4d2d2d;">
       <div class="container">
 
           <a class="navbar-brand" href="/">
-            <h1 class="text-light">ながのCAKE</h1>
+            <div class="text-light">ながのCAKE</div>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -58,9 +58,7 @@
               <% end %>
 
             <% elsif customer_signed_in? %>
-              <li class="nav-item text-light">
-                <h4>ようこそ、<%= current_customer.last_name %>さん！</h4>
-              </li>
+              <div class="nav-item text-light my-2 mr-4">ようこそ、<%= current_customer.last_name %>さん！</div>
               <li class="nav-item">
                  <%= link_to "マイページ", customers_show_path, class: 'nav-link text-light ' %>
               </li>
