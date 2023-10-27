@@ -1,8 +1,8 @@
 <div>
   <%= image_tag @item.get_image(200,200) %>
-  <h1>商品名<%= @item.name %></h1>
-  <p>商品説明<%= @item.introduction %></p>
-  <p>¥<%= @item.add_tax_price.to_s(:dalimited) %>(税込)</p>
+  <h1><%= @item.name %></h1>
+  <p><%= @item.introduction %></p>
+  <p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
 </div>
 
 <%# if customer_signed_in? %> <!--もしユーザーがログインしていたらカートに追加を表示-->
