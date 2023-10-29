@@ -1,83 +1,83 @@
+ <div class="mx-auto" style="max-width:900px;">
 
-<div class="mx-auto" style="max-width:900px;">
+    <h4 class="d-flex justify-content-between text-light">
+      <span style="background-color:#adb5bd">　ショッピングカート　</span>
+      <div class="text-right">
+          <% if current_customer.cart_items.any? %>
+            <button class="btn btn-danger">
+              <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, class: 'text-light' %>
+            </button>
+          <% end %>
+      </div>
+    </h4>
 
-  <h4 class="d-flex justify-content-between text-light">
-    <span style="background-color:#adb5bd">ショッピングカート</span>
-    <div class="text-right">
-        <% if current_customer.cart_items.any? %>
+  <table class="table table-bordered" style="max-width:900px;">
+    <thead class="bg-secondary">
+      <tr class="text-light">
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td>
+          <%= image_tag cart_item.item.get_image(50,50) %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+        <td class="text-center">
+          <%= form_with model: cart_item do |f| %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "変更", class: "btn btn-success ml-2 mt-1" %>
+          <% end %>
+        </td>
+        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+          <% @total += cart_item.subtotal %>
+          <!--０と定義したところに税込価格と数量をかけたものを足していく-->
+        <td class="text-center">
           <button class="btn btn-danger">
-            <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, class: 'text-light' %>
+          <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'text-light' %>
           </button>
-        <% end %>
-    </div>
-  </h4>
-
-<table class="table table-bordered" style="max-width:900px;">
-  <thead class="bg-secondary">
-    <tr class="text-light">
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cart_items.each do |cart_item| %>
-    <tr>
-      <td>
-        <%= image_tag cart_item.item.get_image(50,50) %>
-        <%= cart_item.item.name %>
-      </td>
-      <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
-      <td class="text-center">
-        <%= form_with model: cart_item do |f| %>
-          <%= f.select :amount, *[1..10] %>
-          <%= f.submit "変更", class: "btn btn-success ml-2 mt-1" %>
-        <% end %>
-      </td>
-      <td><%= cart_item.subtotal.to_s(:delimited) %></td>
-        <% @total += cart_item.subtotal %>
-        <!--０と定義したところに税込価格と数量をかけたものを足していく-->
-      <td class="text-center">
-        <button class="btn btn-danger">
-        <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'text-light' %>
-        </button>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div>
-  <% if current_customer.cart_items.any? %>
-  <% else %>
-    カートに商品が入っていません。
-  <% end %>
-</div>
-
-<div class="d-flex align-items-center justify-content-between">
-  <button class="btn btn-info">
-    <%=link_to '買い物を続ける', root_path, class: 'text-light' %>
-  </button>
-
-  <table class="table table-bordered" style="max-width:300px;">
-  <tr>
-    <th class="bg-secondary">
-       <p class="text-light">合計金額</p>
-    </th>
-    <td><%= @total.to_s(:delimited) %></td>
-  </tr>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
-</div>
 
-<div class="text-center">
-  <% if current_customer.cart_items.any? %><!--カートに商品が入っているか-->
-    <!--カートに商品が入っていたらリンク表示-->
-    <button class="btn btn-success">
-    <%= link_to "情報入力に進む", new_order_path, class: 'text-light' %>
+  <div>
+    <% if current_customer.cart_items.any? %>
+    <% else %>
+      カートに商品が入っていません。
+    <% end %>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between">
+    <button class="btn btn-info">
+      <%=link_to '買い物を続ける', root_path, class: 'text-light' %>
     </button>
-  <% end %>
-</div>
+
+    <table class="table table-bordered" style="max-width:300px;">
+    <tr>
+      <th class="bg-secondary">
+         <p class="text-light">合計金額</p>
+      </th>
+      <td><%= @total.to_s(:delimited) %></td>
+    </tr>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <% if current_customer.cart_items.any? %><!--カートに商品が入っているか-->
+      <!--カートに商品が入っていたらリンク表示-->
+      <button class="btn btn-success">
+      <%= link_to "情報入力に進む", new_order_path, class: 'text-light' %>
+      </button>
+    <% end %>
+  </div>
+
 </div>

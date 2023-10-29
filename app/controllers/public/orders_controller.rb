@@ -8,16 +8,20 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm #注文情報入力画面　Orderモデルに保存
-    @cart_items = current_customer.cart_items
-    @order = Order.new(order_params) #ストロングパラメータ
-    @order.customer_id = current_customer.id
-    @order.postal_code = current_customer.postal_code
-    @order.address = current_customer.address
-    @order.name = current_customer.last_name + current_customer.first_name
+    if params[:order].present? #パラメータがあるか確認
+      @cart_items = current_customer.cart_items
+      @order = Order.new(order_params) #ストロングパラメータ
+      @order.customer_id = current_customer.id
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.last_name + current_customer.first_name
 
-    @total = 0
-    @postage = 800
-    @total_price = 0
+      @total = 0
+      @postage = 800
+      @total_price = 0
+    else
+      return redirect_to new_order_path #リロードしたらnewに飛ぶ
+    end
   end
 
   def complete

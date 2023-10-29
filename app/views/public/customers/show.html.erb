@@ -1,14 +1,52 @@
-<h1>マイページ</h1>
+<div class="mx-auto" style="max-width:900px;">
+  <h4 class="d-flex text-light mb-4 ml-5">
+    <span style="background-color:#adb5bd">　マイページ　</span>
+  </h4>
 
-<h2>登録情報</h2>
-<%=link_to "編集する", customers_information_edit_path(current_customer) %><br>
+  <div class="d-flex align-items-center mb-3">
+    <h5 class="font-weight-bold mr-4">登録情報</h5>
+    <button class="btn btn-success">
+       <%=link_to "編集する", customers_information_edit_path(current_customer), class: 'text-light' %>
+    </button>
+  </div>
 
-氏名 <%= @customer.last_name %> <%= @customer.first_name %><br>
-カナ <%= @customer.last_name_kana %> <%= @customer.first_name_kana %><br>
-郵便番号 <%= @customer.postal_code %><br>
-住所 <%= @customer.address %><br>
-電話番号 <%= @customer.telephone_number %><br>
-メールアドレス <%= @customer.email %><br>
+  <table class="table table-bordered">
+    <tr>
+      <th class="bg-secondary text-light" style="width: 30%">氏名</th>
+      <td style="width: 60%"><%= @customer.last_name %> <%= @customer.first_name %></td>
+    </tr>
 
-<h2>注文履歴</h2>
-<%= link_to "一覧を見る" ,orders_path %>
+    <tr>
+      <th class="bg-secondary text-light">カナ</th>
+      <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></button>
+    </tr>
+
+    <tr>
+      <th class="bg-secondary text-light">郵便番号</th>
+      <td><%= @customer.postal_code %></td>
+    </tr>
+
+    <tr>
+      <th class="bg-secondary text-light">住所</th>
+      <td><%= @customer.address %></td>
+    </tr>
+
+    <tr>
+      <th class="bg-secondary text-light">電話番号</th>
+      <td><%= @customer.telephone_number %></td>
+    </tr>
+
+    <tr>
+      <th class="bg-secondary text-light">メールアドレス</th>
+      <td><%= @customer.email %></td>
+    </tr>
+  </table>
+
+  <div class="d-flex align-items-center">
+    <h5 class="font-weight-bold mr-4">注文履歴</h5>
+    <button class="btn btn-info">
+      <%= link_to "一覧を見る" ,orders_path, class: 'text-light' %>
+    </button>
+  </div>
+
+</div>

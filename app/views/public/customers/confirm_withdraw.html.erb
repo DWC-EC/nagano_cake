@@ -1,9 +1,15 @@
-退会確認画面
-
-<h1>本当に退会しますか？</h1>
+<div class="mx-auto text-center" style="max-width:900px;">
+<h5 class="font-weight-bold mr-4 mb-4">本当に退会しますか？</h5>
 退会すると、会員登録情報や<br>
 これまでの購入履歴が閲覧できなくなります。<br>
 退会する場合は、「退会する」をクリックしてください。<br>
 
-<%=link_to "退会しない", customers_show_path %><br>
-<%=link_to "退会する", customers_withdraw_path, method: :patch, "data-confirm" => "退会してもいいですか?"  %>
+<div class="mt-4">
+  <button class="btn btn-info mr-3">
+    <%=link_to "退会しない", customers_show_path, class: 'text-light' %>
+  </button>
+  <button class="btn btn-danger">
+  <%=link_to "退会する", customers_withdraw_path, method: :patch, "data-confirm" => "退会してもいいですか?", class: 'text-light' %>
+  </button>
+</div>
+</div>

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :update, :destroy, :create]
 
     post "/orders/confirm" => "orders#confirm"
+    get "/orders/confirm" => "orders#confirm" #confirmリロード用画面
     get "/orders/complete" => "orders#complete"
     resources :orders, only: [:new, :index, :create, :show]
    end
