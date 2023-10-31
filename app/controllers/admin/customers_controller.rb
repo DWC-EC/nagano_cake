@@ -20,7 +20,7 @@ class Admin::CustomersController < ApplicationController
       flash[:notice] = "編集が完了しました。"
       redirect_to admin_customer_path(@customer.id)
     else
-      flash.now[:notice] = "編集に失敗しました。"
+      flash.now[:alert] = "編集に失敗しました。"
       render :edit
     end
   end

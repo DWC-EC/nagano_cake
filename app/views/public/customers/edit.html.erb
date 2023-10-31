@@ -19,21 +19,23 @@
   <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
   <!--モデルのurl、メソッドを指定してほしいアクションを呼び出す-->
     <label for="name">氏名</label><br>
-    <%= f.text_field :last_name, autofocus: true, class: "col-xs-2 mb-2" %>
+    <div class="d-flex justify-content-start">
+    <%= f.text_field :last_name, autofocus: true, class: "col-xs-2 mb-2 mr-3" %>
     <%= f.text_field :first_name, autofocus: true, class: "col-xs-2 mb-2" %>
-    <br>
+    </div>
 
     <label for="name_kana">カナ</label><br>
-    <%= f.text_field :last_name_kana, autofocus: true,class: "col-xs-2 mb-2" %>
+    <div class="d-flex justify-content-start">
+    <%= f.text_field :last_name_kana, autofocus: true,class: "col-xs-2 mb-2 mr-3" %>
     <%= f.text_field :first_name_kana, autofocus: true, class: "col-xs-2 mb-2" %>
-    <br>
+    </div>
 
     <label for="postal_code">郵便番号</label><br>
       <%= f.text_field :postal_code, autofocus: true, class: "mb-2" %>
     <br>
 
     <label for="address">住所</label><br>
-    <%= f.text_field :address, autofocus: true, class: "mb-2" %>
+    <%= f.text_field :address, autofocus: true, class: "mb-2 col-sm-12" %>
     <br>
 
     <label for="telephone_number">電話番号</label><br>
@@ -44,9 +46,9 @@
     <%= f.text_field :email, autofocus: true, class: "mb-2" %>
     <br>
 
-    <div class="row justify-content-center m-3 pr-5">
+    <div class="d-flex justify-content-center m-3 pl-2">
       <%= f.submit "変更内容を保存", class: "btn btn-success mr-2" %><!--form_withで指定したアクション-->
-      <button class="btn btn-danger ml-5">
+      <button class="btn btn-danger ml-5 btn-sm">
         <%=link_to "退会する", customers_confirm_withdraw_path, class: 'text-light' %>
       </button>
     </div>

@@ -1,19 +1,39 @@
-<div>
-  <%= image_tag @item.get_image(200,200) %>
-  <h1><%= @item.name %></h1>
-  <p><%= @item.introduction %></p>
-  <p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
+<div class="mx-auto" style="max-width:900px;">
+
+  <div class="d-flex justify-content-center">
+    <div class="mr-5">
+      <%= image_tag @item.get_image(200,200) %>
+    </div>
+    <div>
+      <h4 class="font-weight-bold pb-3"><%= @item.name %></h4>
+      <div class="pb-3">
+        <%= @item.introduction %>
+      </div>
+      <div class="d-flex align-items-center my-3" >
+        <h4 class="font-weight-bold">¥<%= @item.add_tax_price.to_s(:delimited) %></h4>
+        <h6>(税込)</h6>
+      </div>
+
+      <div>
+        <%# if customer_signed_in? %> <!--もしユーザーがログインしていたらカートに追加を表示-->
+        <!-- ↑コントローラーのbefore_actionでcreateを押した時ログインしていなかったらログイン画面に推移するよう変更-->
+        <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+          <div class="d-flex flex-wrap align-items-center">
+            個数選択
+            <%= f.select :amount, *[1..10] %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <!--数と一緒にitem_idのデータを送る。viewには表示されない
+            item_idをコントローラーの@item.idに渡す-->
+            <div class="ml-4">
+              <%= f.submit "カートに入れる",class: "btn btn-success" %>
+            </div>
+          </div>
+        <% end %>
+        <%# end %>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
-
-<%# if customer_signed_in? %> <!--もしユーザーがログインしていたらカートに追加を表示-->
-<!-- ↑コントローラーのbefore_actionでcreateを押した時ログインしていなかったらログイン画面に推移するよう変更-->
-  <%= form_with model: @cart_item, url: cart_items_path do |f| %>
-    個数選択
-    <%= f.select :amount, *[1..10] %>
-    <%= f.hidden_field :item_id, :value => @item.id %>
-    <!--数と一緒にitem_idのデータを送る。viewには表示されない
-    item_idをコントローラーの@item.idに渡す-->
-    <%= f.submit "カートに入れる" %>
-  <% end %>
-<%# end %>
-

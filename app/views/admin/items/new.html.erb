@@ -1,14 +1,21 @@
-<% if @item.errors.any? %>
-  <%= @item.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-<% end %>
+<div class="mx-auto" style="max-width:900px;">
 
-<h1>商品新規登録</h1>
+  <% if @item.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <%= @item.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
 
+  <h4 class="d-flex text-light mb-3 ml-5">
+    <span style="background-color:#adb5bd">　商品新規登録　</span>
+  </h4>
+
+<div class="bg-info text-center">
 <%= form_with model: @item, url: admin_items_path do |f| %>
   商品画像<%= f.file_field :image, accept: "image/*" %><br>
 
@@ -17,6 +24,7 @@
   商品説明<%= f.text_area :introduction %><br>
 
   税抜価格<%= f.text_field :price %>円<br>
+</div>
 
   <div><%= f.submit '新規登録' %></div>
 <% end %>
