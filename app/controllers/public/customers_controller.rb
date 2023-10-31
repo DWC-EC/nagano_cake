@@ -13,7 +13,7 @@ class Public::CustomersController < ApplicationController
       flash[:notice] = "登録情報の編集に成功しました。"
       redirect_to customers_show_path
     else
-      flash.now[:notice] = "登録情報の編集に失敗しました。"
+      flash.now[:alert] = "登録情報の編集に失敗しました。"
       render :edit
     end
   end

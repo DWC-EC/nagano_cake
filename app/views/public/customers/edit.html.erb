@@ -2,12 +2,14 @@
 
 <div class="col-6 mx-auto">
   <% if @customer.errors.any? %>
+    <div class="alert alert-danger" role="alert">
     <%= @customer.errors.count %>件のエラーが発生しました
-      <ul>
-        <% @customer.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
   <% end %>
 
   <h4 class="d-flex text-light mb-4 ml-5">
