@@ -2,46 +2,81 @@
   <h4 class="d-flex justify-content-between text-light ml-5 mb-5">
     <span style="background-color:#adb5bd">　注文履歴詳細　</span>
   </h4>
-  
-<h2>注文情報</h2>
-<div>
-    <p>注文日：<%= @order.created_at.strftime('%Y/%m/%d') %></p>
-    <p>配送先：〒<%= @order.postal_code %><br>
-        <%= @order.address %><br>
-        <%= @order.name %>
-    </p>
-    <p>支払方法：<%= @order.payment_method_i18n %></p>
-</div>
 
-<h2>請求情報</h2>
-<div>
-  <p>商品合計：<%= @order.billing_amount - @order.postage %>円</p>
-  <p>配送料：<%= @order.postage %>円</p>
-  <p>ご請求額：<%=  @order.billing_amount %>円</p>
-</div>
+  <div class="d-flex flex-wrap pb-5">
+    <div class="pr-5 col-lg-8 col-md-12 col-sm-12">
+      <h6 class="font-weight-bold mr-4">注文情報</h6>
+      <table class="table table-bordered">
+        <tr>
+          <th class="bg-secondary">
+            <span class="text-light">注文日</span>
+          </th>
+          <td style="vertical-align:middle;"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th class="bg-secondary">
+            <span class="text-light">配送先</span>
+            <td style="vertical-align:middle;">
+              〒<%= @order.postal_code %><br>
+              <%= @order.address %><br>
+              <%= @order.name %>
+            </td>
+          </th>
+        <tr>
+          <th class="bg-secondary">
+            <span class="text-light">支払方法</span>
+            <td style="vertical-align:middle;"><%= @order.payment_method_i18n %></td>
+          </th>
+      </table>
+    </div>
 
-<h2>注文内容</h2>
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>商品</th>
-        <th>単価(税込)</th>
-        <th>個数</th>
-        <th>小計</th>
-      </tr>
-    </thead>
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <h6 class="font-weight-bold mr-4">請求情報</h6>
+        <table class="table table-bordered">
+          <tr>
+            <th class="bg-secondary">
+              <span class="text-light">商品合計</span>
+            </th>
+            <td style="vertical-align:middle;"><%= (@order.billing_amount - @order.postage).to_s(:delimited) %>円</td>
+          </tr>
+          <tr>
+            <th class="bg-secondary">
+              <span class="text-light">配送料</span>
+            </th>
+            <td style="vertical-align:middle;"><%= @order.postage.to_s(:delimited) %>円</td>
+          </tr>
+          <tr>
+            <th class="bg-secondary">
+              <span class="text-light">ご請求額</span>
+            </th>
+            <td style="vertical-align:middle;"><%=  @order.billing_amount.to_s(:delimited) %>円</td>
+          </tr>
+        </table>
+  </div>
+  </div>
 
-    <tbody>
-      <% @order_items.each do |order_item| %>
-      <tr>
-        <td><%= order_item.item.name %><!--order_itemとアソシエーションしたitemモデルからnemeを呼び出し--></td>
-        <td><%= order_item.price %></td>
-        <td><%= order_item.amount %></td>
-        <td><%= order_item.price * order_item.amount %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <div>
+    <h6 class="font-weight-bold mr-4">注文内容</h6>
+     <table class="table table-bordered" style="max-width:900px;">
+      <thead class="bg-secondary">
+        <tr class="text-light">
+          <th>商品</th>
+          <th>単価(税込)</th>
+          <th>個数</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.item.name %><!--order_itemとアソシエーションしたitemモデルからnemeを呼び出し--></td>
+          <td><%= order_item.price.to_s(:delimited) %></td>
+          <td><%= order_item.amount %></td>
+          <td><%= (order_item.price * order_item.amount).to_s(:delimited) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
