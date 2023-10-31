@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     patch "/customers/withdraw" => "customers#withdraw"
     patch "/customers/information" => "customers#update"
     get "/customers" => redirect("/customers/sign_up") #新規登録失敗後sign_upにリロード
+    get "customers/information" => "customers#edit"
 
     resources :items, only: [:index, :show]
 

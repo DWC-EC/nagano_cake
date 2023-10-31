@@ -1,33 +1,41 @@
-<h1>注文履歴一覧</h1>
+<div class="mx-auto" style="max-width:900px;">
+  <h4 class="d-flex justify-content-between text-light ml-5 mb-5">
+    <span style="background-color:#adb5bd">　注文履歴一覧　</span>
+  </h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>注文日</th>
-      <th>配送先</th>
-      <th>注文商品</th>
-      <th>支払金額</th>
-      <th>注文詳細</th>
-    </tr>
-  </thead>
+  <table class="table table-bordered" style="max-width:900px;">
+    <thead class="bg-secondary">
+      <tr class="text-light">
+        <th>注文日</th>
+        <th>配送先</th>
+        <th>注文商品</th>
+        <th>支払金額</th>
+        <th>注文詳細</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @order.each do |order| %>
-    <tr>
-      <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-      <td>
-        〒<%= order.postal_code %><br>
-        <%= order.address %><br>
-        <%= order.name %>
-      </td>
-      <td>
-        <% order.order_items.each do |order_item| %>
-          <%= order_item.item.name %><br>
-        <% end %>
-      </td>
-      <td><%= order.billing_amount %></td>
-      <td><%=link_to "表示する" ,order_path(order.id) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @order.each do |order| %>
+      <tr>
+        <td style="vertical-align:middle;"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+        <td style="vertical-align:middle;">
+          〒<%= order.postal_code %><br>
+          <%= order.address %><br>
+          <%= order.name %>
+        </td>
+        <td style="vertical-align:middle;">
+          <% order.order_items.each do |order_item| %>
+            <%= order_item.item.name %><br>
+          <% end %>
+        </td>
+        <td style="vertical-align:middle;"><%= order.billing_amount.to_s(:delimited) %>円</td>
+        <td class="text-center" style="vertical-align:middle;">
+          <button class="btn btn-info">
+            <%=link_to "表示する" ,order_path(order.id), class: "text-light" %>
+          </button>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

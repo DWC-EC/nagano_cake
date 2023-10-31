@@ -25,21 +25,21 @@
     <tbody>
       <% @cart_items.each do |cart_item| %>
       <tr>
-        <td>
+        <td style="vertical-align:middle;">
           <%= image_tag cart_item.item.get_image(50,50) %>
           <%= cart_item.item.name %>
         </td>
-        <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
-        <td class="text-center">
+        <td style="vertical-align:middle;"><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+        <td class="text-center" style="vertical-align:middle;">
           <%= form_with model: cart_item do |f| %>
             <%= f.select :amount, *[1..10] %>
             <%= f.submit "変更", class: "btn btn-success ml-2 mt-1" %>
           <% end %>
         </td>
-        <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+        <td style="vertical-align:middle;"><%= cart_item.subtotal.to_s(:delimited) %></td>
           <% @total += cart_item.subtotal %>
           <!--０と定義したところに税込価格と数量をかけたものを足していく-->
-        <td class="text-center">
+        <td class="text-center" style="vertical-align:middle;">
           <button class="btn btn-danger">
           <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'text-light' %>
           </button>
@@ -64,9 +64,9 @@
     <table class="table table-bordered" style="max-width:300px;">
     <tr>
       <th class="bg-secondary">
-         <p class="text-light">合計金額</p>
+         <span class="text-light">合計金額</span>
       </th>
-      <td><%= @total.to_s(:delimited) %></td>
+      <td style="vertical-align:middle;"><%= @total.to_s(:delimited) %></td>
     </tr>
     </table>
   </div>
