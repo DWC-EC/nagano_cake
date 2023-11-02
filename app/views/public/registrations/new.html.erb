@@ -6,34 +6,23 @@
       <span style="background-color:#adb5bd">　新規会員登録　</span>
     </h4>
 
-    <div class="mb-4 bg-info">
+    <div class="ml-5 mb-4">
       <%= form_with model: @customer, url: customer_registration_path do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
 
-        <div class="row mb-3">
-          <div class="col-sm-3">
-            <div class="pl-5">名前</div>
-          </div>
-          <div class="form-inline ml-3">
-            <div class="form-group">
-              (姓)
-              <%= f.text_field :last_name, class: "mr-3" %>
-              (名)
-              <%= f.text_field :first_name %>
-            </div>
+        <div class="mb-3">
+          名前<br>
+           <label for="">(姓)　</label>
+          <%= f.text_field :last_name %>
+           <label for="">　　(名)</label>
+          <%= f.text_field :first_name %>
         </div>
-
-       <div class="row mb-3">
-          <div class="col-sm-3">
-            <div class="pl-5">フリガナ</div>
-          </div>
-          <div class="form-inline ml-3">
-            <div class="form-group">
-              (セイ)
-              <%= f.text_field :last_name_kana %>
-              (メイ)
-              <%= f.text_field :first_name_kana %>
-            </div>
+        <div class="mb-3">
+          フリガナ<br>
+           <label>(セイ)</label>
+          <%= f.text_field :last_name_kana %>
+           <label>　(メイ)</label>
+          <%= f.text_field :first_name_kana %>
         </div>
 
         <div class="mb-3">
