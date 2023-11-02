@@ -1,39 +1,89 @@
-<h1>注文履歴詳細</h1>
-<p>購入者：
-  <%= link_to admin_customer_path(@order.customer.id) do %>
-    <%= @order.customer.last_name + @order.customer.first_name %>
-  <% end %>
-</p>
-<p>注文日：<%= @order.created_at.strftime('%Y/%m/%d') %></p>
-<p>配送先：<%= @order.address %><br>
-  <%= @order.name %>
-</p>
-<p>支払方法：<%= @order.payment_method_i18n %></p>
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-      </tr>
-    </thead>
+<div class="mx-auto" style="max-width:900px;">
 
-    <tbody>
-      <% @order_items.each do |order_item| %>
-      <tr>
-        <td><%= order_item.item.name %><!--order_itemとアソシエーションしたitemモデルからnemeを呼び出し--></td>
-        <td><%= order_item.price %></td>
-        <td><%= order_item.amount %></td>
-        <td><%= order_item.price * order_item.amount %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <h4 class="d-flex text-light mb-3 ml-5">
+    <span style="background-color:#adb5bd">　注文履歴詳細　</span>
+  </h4>
+
+  <div class="pl-3 pb-5">
+    <div class="row mb-3">
+      <div class="col-sm-2">
+        <h6 class="font-weight-bold">購入者</h6>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to admin_customer_path(@order.customer.id) do %>
+          <%= @order.customer.last_name + @order.customer.first_name %>
+        <% end %>
+      </div>
+    </div>
+
+      <div class="row mb-3">
+        <div class="col-sm-2">
+          <h6 class="font-weight-bold">注文日</h6>
+        </div>
+        <div class="col-sm-6"><%= @order.created_at.strftime('%Y/%m/%d') %></div>
+      </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-2">
+        <h6 class="font-weight-bold">配送先</h6>
+      </div>
+      <div class="col-sm-6">〒<%= @order.address %><br>
+        <%= @order.name %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-2">
+        <h6 class="font-weight-bold">支払方法</h6>
+      </div>
+      <div class="col-sm-6"><%= @order.payment_method_i18n %></div>
+    </div>
 </div>
-<div>
-  <p>商品合計：<%= @order.billing_amount - @order.postage %>円</p>
-  <p>送料：<%= @order.postage %>円</p>
-  <p>請求金額合計：<%=  @order.billing_amount %>円</p>
+
+  <div class="d-flex flex-wrap justify-content-between align-items-end" style="max-width:900px;">
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+        <thead class="bg-secondary">
+          <tr class="text-light">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %><!--order_itemとアソシエーションしたitemモデルからnemeを呼び出し--></td>
+            <td><%= order_item.price.to_s(:delimited) %></td>
+            <td><%= order_item.amount %></td>
+            <td><%= order_item.price * order_item.amount %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-4" style="max-width:300px;">
+      <table class="table table-bordered">
+        <tr>
+          <th class="bg-secondary text-light">商品合計</th>
+          <td><%= (@order.billing_amount - @order.postage).to_s(:delimited) %>円</td>
+        </tr>
+
+        <tr>
+          <th class="bg-secondary text-light">送料</th>
+          <td><%= @order.postage.to_s(:delimited) %>円</td>
+        </tr>
+
+        <tr>
+          <th class="bg-secondary text-light">請求金額合計</th>
+          <td><%=  @order.billing_amount.to_s(:delimited) %>円</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
 </div>

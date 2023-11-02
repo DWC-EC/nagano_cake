@@ -1,23 +1,63 @@
-<div><%= flash.now[:notice] %></div>
-<h1>商品編集</h1>
+<div class="mx-auto" style="max-width:900px;">
 
-<% if @item.errors.any? %>
-  <%= @item.errors.count %>件のエラーが発生しました
-    <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-<% end %>
+  <div class="col-6 mx-auto">
+    <div><%= flash.now[:notice] %></div>
+    <% if @item.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <%= @item.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 
-<%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
-  商品画像<%= f.file_field :image, accept: "image/*" %><br>
 
-  商品名<%= f.text_field :name, autofocus: true %><br>
+  <h4 class="d-flex text-light mb-4 ml-5">
+    <span style="background-color:#adb5bd">　商品編集　</span>
+  </h4>
 
-  商品説明<%= f.text_area :introduction, autofocus: true %><br>
+  <div>
+    <%= form_with model: @item, url: admin_item_path(@item.id) do |f| %>
+    <div class="container pl-3 mb-5 mt-5">
+      <div class="row mb-3 pl-5">
+        <div class="col-sm-3">
+          <div class="pl-5">商品画像</div>
+        </div>
+        <div class="col-sm-8"><%= f.file_field :image, accept: "image/*" %></div>
+      </div>
 
-  税抜価格<%= f.text_field :price, autofocus: true %>円<br>
+      <div class="row mb-3 pl-5">
+        <div class="col-sm-3">
+          <div class="pl-5">商品名</div>
+        </div>
+        <div class="col-sm-8"><%= f.text_field :name, autofocus: true, class: "form-control",style: "width:50%" %></div>
+      </div>
 
-  <div><%= f.submit '変更を保存' %></div>
-<% end %>
+      <div class="row mb-3 pl-5">
+        <div class="col-sm-3">
+          <div class="pl-5">商品説明</div>
+        </div>
+        <div class="col-sm-8"><%= f.text_area :introduction, autofocus: true, class: "form-control",style: "width:50%", rows: "5" %></div>
+      </div>
+
+      <div class="row mb-3 pl-5">
+        <div class="col-sm-3">
+          <div class="pl-5">税抜価格</div>
+        </div>
+        <div class="d-flex">
+          <div class="col-sm-11"><%= f.text_field :price, autofocus: true, class: "form-control",style: "width:105%" %></div>
+          <div>円</div>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="text-center mr-5">
+        <%= f.submit '変更を保存',class: "btn btn-success px-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>
